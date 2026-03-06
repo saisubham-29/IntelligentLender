@@ -1,0 +1,145 @@
+
+================================================================================
+COMPREHENSIVE CREDIT APPRAISAL MEMO (CAM)
+================================================================================
+
+Date: 06-Mar-2026
+Applicant ID: TEST-001
+Company Name: Test Company Ltd
+CIN: U12345MH2015PTC123456
+GSTIN: 27AABCU9603R1ZM
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+RECOMMENDATION: REJECT
+Proposed Credit Limit: ₹0.00
+Risk Premium: 0 bps
+Approval Confidence: 60.0%
+Default Probability: 5.00%
+
+================================================================================
+THE FIVE Cs OF CREDIT ANALYSIS
+================================================================================
+
+1. CHARACTER (Integrity & Willingness to Repay)
+────────────────────────────────────────────────────────────────────────────────
+
+Promoter/Management Background:
+  • Promoters: ['Mr. Test']
+  • Years in Business: N/A
+  • Industry Experience: N/A years
+
+Credit History:
+  • CIBIL/Credit Score: 720
+  • Existing Loans: 1 accounts
+  • Delinquency History: 0 instances
+  • Credit Utilization: 50.0%
+
+Regulatory/Legal Standing:
+No adverse findings
+
+2. CAPACITY (Ability to Repay)
+────────────────────────────────────────────────────────────────────────────────
+
+Financial Performance:
+  • Annual Revenue: ₹50,000,000.00
+  • EBITDA: ₹8,000,000.00
+  • Net Profit: ₹4,000,000.00
+  • PAT Margin: 8.00%
+  • Debt Service Coverage Ratio: 1.80x
+  • Interest Coverage Ratio: 3.20x
+
+GST Analysis:
+  • GST Turnover (Last 12M): ₹0.00
+  • GST Filing Compliance: N/A
+
+3. CAPITAL (Financial Strength & Net Worth)
+────────────────────────────────────────────────────────────────────────────────
+
+Balance Sheet Strength:
+  • Total Assets: ₹60,000,000.00
+  • Net Worth: ₹25,000,000.00
+  • Total Debt: ₹20,000,000.00
+  • Debt-to-Equity Ratio: 0.80x
+  • Current Ratio: 1.88x
+  • Tangible Net Worth: ₹23,000,000.00
+
+4. COLLATERAL (Security)
+────────────────────────────────────────────────────────────────────────────────
+
+Primary Security:
+  • Type: N/A
+  • Value: ₹80,000,000.00
+  • LTV Ratio: 0.0%
+
+Collateral Coverage: 8000000000.0%
+
+5. CONDITIONS (Economic & Industry Environment)
+────────────────────────────────────────────────────────────────────────────────
+
+Industry: Manufacturing
+Sector Outlook: Stable
+
+Market Position:
+  • Market Share: N/A
+  • Competitive Position: N/A
+
+================================================================================
+PRIMARY DUE DILIGENCE FINDINGS
+================================================================================
+
+No primary insights recorded
+
+================================================================================
+DATA VALIDATION & FRAUD CHECKS
+================================================================================
+
+
+================================================================================
+ML MODEL INSIGHTS & EXPLAINABILITY
+================================================================================
+
+Model Confidence: 60.0%
+Default Risk: 5.00%
+
+Top Risk Factors (Feature Importance):
+  • Age: 0.000
+  • Income: 0.000
+  • Employment Years: 0.000
+  • Debt To Income: 0.000
+  • Current Ratio: 0.000
+  • Profit Margin: 0.000
+  • Credit Score: 0.000
+  • Num Accounts: 0.000
+
+================================================================================
+FINAL RECOMMENDATION & DECISION RATIONALE
+================================================================================
+
+Decision: REJECT
+
+Rejection Rationale:
+
+================================================================================
+PREPARED BY
+================================================================================
+
+Credit Officer: [Name]
+Date: 06-Mar-2026
+
+REVIEWED BY
+Credit Manager: [Name]
+Date: ___________
+
+APPROVED BY
+Credit Committee: [Names]
+Date: ___________
+
+================================================================================
+END OF MEMO
+================================================================================
+
+Note: This CAM was generated using AI-powered credit decisioning engine.
+All recommendations are subject to final approval by authorized credit committee.
