@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intelli-Credit | AI Credit Decisioning</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        .header { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 40px; text-align: center; }
+        .header h1 { color: #667eea; font-size: 3em; margin-bottom: 10px; }
+        .header p { color: #666; font-size: 1.2em; }
+        .modes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 40px; }
+        .mode-card { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); cursor: pointer; transition: all 0.3s; text-align: center; }
+        .mode-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.3); }
+        .mode-card .icon { font-size: 4em; margin-bottom: 20px; }
+        .mode-card h2 { color: #333; margin-bottom: 15px; font-size: 1.8em; }
+        .mode-card p { color: #666; line-height: 1.6; }
+        .mode-card.mode1 .icon { color: #667eea; }
+        .mode-card.mode2 .icon { color: #f093fb; }
+        .mode-card.mode3 .icon { color: #4facfe; }
+        .full-flow { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); text-align: center; }
+        .full-flow h2 { color: #667eea; margin-bottom: 20px; font-size: 2em; }
+        .full-flow p { color: #666; margin-bottom: 30px; font-size: 1.1em; }
+        .btn { background: #667eea; color: white; padding: 20px 50px; border: none; border-radius: 10px; font-size: 1.2em; font-weight: 600; cursor: pointer; transition: all 0.3s; box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3); text-decoration: none; display: inline-block; }
+        .btn:hover { background: #5568d3; transform: translateY(-2px); box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏦 Intelli-Credit</h1>
+            <p>AI-Powered Credit Decisioning Engine with 3-Section Architecture</p>
+        </div>
+
+        <div class="modes">
+            <div class="mode-card mode1" onclick="window.location.href='/mode1'">
+                <div class="icon">📊</div>
+                <h2>Data Ingestor</h2>
+                <p>Parse documents, extract insights, cross-verify GST vs Bank statements, detect circular trading and revenue inflation.</p>
+            </div>
+
+            <div class="mode-card mode2" onclick="window.location.href='/mode2'">
+                <div class="icon">🔍</div>
+                <h2>Digital Credit Manager</h2>
+                <p>Conduct web research on promoters, sector trends, litigation. Add site visit notes and management interview insights.</p>
+            </div>
+
+            <div class="mode-card mode3" onclick="window.location.href='/mode3'">
+                <div class="icon">💡</div>
+                <h2>Recommendation Engine</h2>
+                <p>Analyze Five Cs of Credit, make explainable decisions, generate professional CAM reports with transparent scoring.</p>
+            </div>
+
+            <div class="mode-card mode1" onclick="window.location.href='/ml-training'" style="grid-column: span 2;">
+                <div class="icon">🤖</div>
+                <h2>ML Model Training</h2>
+                <p>Train the credit decision model with historical data (CSV upload or manual entry)</p>
+            </div>
+
+            <div class="mode-card mode2" onclick="window.location.href='/eligibility'" style="grid-column: span 1;">
+                <div class="icon">🎯</div>
+                <h2>Quick Eligibility Check</h2>
+                <p>Check loan eligibility using trained ML model</p>
+            </div>
+        </div>
+
+        <div class="full-flow">
+            <h2>🚀 Complete Credit Appraisal Flow</h2>
+            <p>Run all 3 sections sequentially for comprehensive credit decisioning</p>
+            <a href="/full-flow" class="btn">Start Full Analysis</a>
+        </div>
+    </div>
+</body>
+</html>

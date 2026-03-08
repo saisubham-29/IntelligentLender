@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Ingestor | Intelli-Credit</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 30px; }
+        .header h1 { color: #667eea; font-size: 2.5em; margin-bottom: 10px; }
+        .back-btn { background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; text-decoration: none; display: inline-block; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+        .form-group input { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; }
+        .btn { background: #667eea; color: white; padding: 15px 40px; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; cursor: pointer; }
+        .btn:hover { background: #5568d3; }
+        .result { margin-top: 30px; padding: 30px; border-radius: 10px; background: #f8f9fa; display: none; }
+        .loading { display: none; text-align: center; padding: 20px; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #667eea; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-btn">← Back to Home</a>
+        
+        <div class="header">
+            <h1>📊 Data Ingestor</h1>
+            <p>Upload documents to extract insights and detect fraud patterns</p>
+        </div>
+
+        <div class="content">
+            <form id="ingestForm" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label>GST Filing (PDF)</label>
+                    <input type="file" name="gst_filing" accept=".pdf">
+                </div>
+                <div class="form-group">
+                    <label>Bank Statement (PDF/Excel)</label>
+                    <input type="file" name="bank_statement" accept=".pdf,.xlsx,.xls">
+                </div>
+                <div class="form-group">
+                    <label>Annual Report (PDF)</label>
+                    <input type="file" name="annual_report" accept=".pdf">
+                </div>
+                <div class="form-group">
+                    <label>ITR (PDF)</label>
+                    <input type="file" name="itr" accept=".pdf">
+                </div>
+                <button type="submit" class="btn">Analyze Documents</button>
+            </form>
+
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Processing documents...</p>
+            </div>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('ingestForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            
+            document.querySelector('.loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            
+            const response = await fetch('/api/mode1/ingest', {
+                method: 'POST',
+                body: formData
+            });
+            
+            const data = await response.json();
+            document.querySelector('.loading').style.display = 'none';
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <h2>📊 Extraction Results</h2>
+                <p><strong>Documents Parsed:</strong> ${data.documents_parsed.length}</p>
+                <p><strong>Extraction Quality:</strong> ${data.extraction_quality}</p>
+                <h3>Verification Results</h3>
+                <pre>${JSON.stringify(data.verification_results, null, 2)}</pre>
+                <h3>Parsed Data</h3>
+                <pre>${JSON.stringify(data.parsed_documents, null, 2)}</pre>
+            `;
+        });
+    </script>
+</body>
+</html>

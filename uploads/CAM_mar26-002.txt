@@ -1,0 +1,224 @@
+
+==========================================================================================
+                    COMPREHENSIVE CREDIT APPRAISAL MEMORANDUM (CAM)
+                              CONFIDENTIAL - FOR INTERNAL USE ONLY
+==========================================================================================
+
+REFERENCE NO.: CAM/MAR26-002/20260307
+DATE OF APPRAISAL: 07 March 2026
+PREPARED BY: Credit Risk Analytics Engine
+REVIEWED BY: Branch Credit Manager
+
+==========================================================================================
+SECTION I: BORROWER IDENTIFICATION & FACILITY DETAILS
+==========================================================================================
+
+A. BORROWER PARTICULARS
+   Legal Name of Entity        : AdityaBirla
+   Corporate Identity Number   : 
+   Goods & Services Tax Number : 
+   Industry Classification     : 
+   Constitution                : Private Limited Company
+   Date of Incorporation       : N/A
+
+B. FACILITY REQUESTED
+   Nature of Facility          : Term Loan
+   Quantum Sought              : ₹100,000,000.00
+   Tenure                      : 60 months
+   Proposed End-Use            : Term Loan
+   Security Offered            : Hypothecation of current assets
+
+C. CREDIT RECOMMENDATION
+   Decision                    : REJECT
+   Sanctioned Amount           : ₹0.00
+   Risk-Adjusted Pricing       : Base Rate + 0 bps
+   Credit Rating (Internal)    : BBB (Satisfactory)
+   Probability of Default      : 5.00%
+   Risk Appetite Classification: MODERATE RISK
+
+==========================================================================================
+SECTION II: CREDIT RISK ASSESSMENT - THE FIVE Cs FRAMEWORK
+==========================================================================================
+
+1. CHARACTER - INTEGRITY & TRACK RECORD
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Management & Promoter Profile
+      • Promoter/Director Details : As per KYC documents
+      • Vintage in Business       : N/A years
+      • Industry Experience       : N/A years
+      • Educational Qualification : Graduate/Post-Graduate
+      • Previous Banking Relations: Multiple banks
+
+   B. Credit Bureau Analysis (CIBIL/Experian/Equifax/CRIF)
+      • Composite Credit Score    : 820 (Excellent)
+      • Total Credit Facilities   : 1 accounts
+      • Aggregate Exposure        : ₹36,000,000.00
+      • Credit Utilization Ratio  : 50.0%
+      • Delinquency Instances     : 0 (Last 24 months)
+      • Days Past Due (DPD)       : 0 DPD - Clean
+      • Suit Filed/Written Off    : NIL
+
+   C. Regulatory & Statutory Compliance
+      • GST Filing Status         : Regular
+      • Income Tax Returns        : Filed up to AY 2025-26
+      • ROC Compliance            : Active & Compliant
+      • MSME Registration         : N/A
+      • Environmental Clearances  : As applicable
+
+   D. Market Intelligence & Reputation
+Loan Purpose: Term Loan
+Tenure: 60 months
+
+WEB RESEARCH FINDINGS:
+No significant web findings for AdityaBirla
+
+
+
+2. CAPACITY - CASH FLOW & DEBT SERVICING ABILITY
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Operating Performance Analysis (₹ in Lakhs)
+      • Gross Turnover            : ₹2,000.00 lakhs
+      • EBITDA                    : ₹240.00 lakhs
+      • EBITDA Margin             : 12.00%
+      • Profit After Tax (PAT)    : ₹160.00 lakhs
+      • PAT Margin                : 8.00%
+      • Return on Assets (ROA)    : 6.67%
+      • Return on Equity (ROE)    : 16.67%
+
+   B. Debt Servicing Coverage Ratios
+      • DSCR (Debt Service Coverage): 1.50x ✓ ADEQUATE
+      • Interest Coverage Ratio   : 2.50x ✓ COMFORTABLE
+      • Fixed Charge Coverage     : 1.50x
+
+   C. GST Turnover Analysis & Cross-Verification
+      • GST Turnover (TTM)        : ₹0.00
+      • Average Monthly GST       : ₹0.00
+      • GST Compliance Rating     : Good
+
+3. CAPITAL - NET WORTH & FINANCIAL POSITION
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Balance Sheet Strength (₹ in Lakhs)
+      • Total Assets              : ₹2,400.00 lakhs
+      • Tangible Net Worth (TNW)  : ₹86,400,000.00 lakhs
+      • Net Worth                 : ₹960.00 lakhs
+      • Total Outside Liabilities : ₹720.00 lakhs
+      • Adjusted Net Worth        : ₹888.00 lakhs
+
+   B. Leverage & Gearing Ratios
+      • Debt-to-Equity Ratio      : 0.75x ✓ OPTIMAL
+      • Total Outside Liabilities/TNW: 0.00x
+      • Long-term Debt/Equity     : 0.80x
+      • Gearing Ratio             : 30.0%
+
+   C. Liquidity Position
+      • Current Ratio             : 2.08x ✓ ADEQUATE
+      • Quick Ratio               : 1.00x
+      • Working Capital           : ₹312.00 lakhs
+      • Cash & Bank Balance       : ₹0.00 lakhs
+
+4. COLLATERAL - SECURITY COVERAGE
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Primary Security
+      • Nature of Security        : Hypothecation of Stock & Receivables
+      • Collateral Value          : ₹0.00
+      • Loan-to-Value (LTV) Ratio : 0.0%
+      • Margin Stipulated         : 25%
+      • Valuation Date            : 07-Mar-2026
+      • Valuer                    : Approved Panel Valuer
+
+   B. Collateral Security
+      • Immovable Property        : As per valuation report
+      • Personal Guarantee        : Promoters/Directors
+      • Corporate Guarantee       : N/A
+
+5. CONDITIONS - EXTERNAL FACTORS & INDUSTRY OUTLOOK
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Industry Analysis
+      • Industry Segment          : 
+      • Market Position           : Mid-tier player
+      • Competitive Landscape     : Moderate competition
+      • Growth Outlook            : Stable to Positive
+
+   B. Business Risk Factors
+      • Concentration Risk        : Diversified customer base
+      • Regulatory Risk           : Low
+      • Technology Obsolescence   : Low
+      • Supply Chain Risk         : Moderate
+
+==========================================================================================
+SECTION III: RISK MITIGATION & COVENANTS
+==========================================================================================
+
+A. FINANCIAL COVENANTS
+   • Minimum DSCR              : 1.25x (to be maintained quarterly)
+   • Maximum Debt/Equity       : 2.5x
+   • Minimum TNW               : ₹864.00 lakhs
+   • Current Ratio             : Minimum 1.25x
+
+B. OPERATIONAL COVENANTS
+   • Quarterly Financial Statements to be submitted within 45 days
+   • Annual Audited Financials within 6 months of FY end
+   • Stock & Receivables statements monthly
+   • GST returns & ITR to be filed regularly
+   • Prior approval for capital expenditure > ₹0
+
+C. MONITORING MECHANISM
+   • Monthly stock audit by approved auditors
+   • Quarterly review of financial performance
+   • Annual renewal with updated financials
+   • Credit bureau monitoring (quarterly)
+
+==========================================================================================
+SECTION IV: DECISION RATIONALE & RISK ASSESSMENT
+==========================================================================================
+
+A. QUANTITATIVE RISK SCORING
+
+   Parameter                    Value        Threshold    Status
+   ──────────────────────────────────────────────────────────────────────
+   Credit Score                    820.00       650.00   ✓ PASS
+   Debt To Income                    0.36         0.50   ✓ PASS
+   Current Ratio                     2.08         1.00   ✓ PASS
+   Delinquency Count                 0.00         0.00   ✓ PASS
+   Profit Margin                     0.08         0.00   ✓ PASS
+
+B. ADVERSE FACTORS IDENTIFIED
+   1. Overall risk score too high: 60.0% approval probability (minimum: 65%)
+
+C. CREDIT DECISION SUMMARY
+   • ML Model Confidence       : 60.0%
+   • Risk-Adjusted Return      : N/A
+   • Economic Capital Required : ₹0.00
+   • Expected Loss             : ₹0.00
+
+==========================================================================================
+SECTION V: RECOMMENDATION & APPROVAL
+==========================================================================================
+
+FINAL RECOMMENDATION: REJECT
+
+The credit facility is RECOMMENDED FOR REJECTION due to:
+   ✗ Overall risk score too high: 60.0% approval probability (minimum: 65%)
+
+ALTERNATIVE RECOMMENDATION:
+   • Applicant may reapply after addressing the above concerns
+   • Consider lower quantum with enhanced security
+   • Explore co-borrower/guarantor options
+
+
+──────────────────────────────────────────────────────────────────────────────────────────
+PREPARED BY:                           REVIEWED BY:                    APPROVED BY:
+Credit Analytics Engine                Branch Credit Manager           Regional Credit Head
+Date: 07-Mar-2026
+
+==========================================================================================
+                                    END OF CAM
+==========================================================================================
+
+DISCLAIMER: This CAM is generated using AI/ML models and should be reviewed by authorized 
+credit officers before final sanction. All information is subject to verification.

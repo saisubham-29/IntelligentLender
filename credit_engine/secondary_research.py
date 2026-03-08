@@ -1,134 +1,191 @@
-"""Secondary research using web search - Indian context"""
+"""Secondary research using web scraping and RAG with Groq"""
 from typing import List, Dict
 import requests
 from bs4 import BeautifulSoup
-import re
+import os
+from groq import Groq
+from ddgs import DDGS
 
 class SecondaryResearch:
-    def __init__(self, api_key: str = None):
-        self.api_key = api_key
-        self.mca_base_url = "https://www.mca.gov.in"
-        self.ecourts_base_url = "https://services.ecourts.gov.in"
+    def __init__(self):
+        api_key = os.getenv('GROQ_API_KEY')
+        self.client = Groq(api_key=api_key) if api_key else None
+        self.model = "llama-3.3-70b-versatile"
     
-    def research_entity(self, entity_name: str, cin: str = None, promoters: List[str] = None) -> Dict:
-        """Perform web-scale research on Indian entity"""
-        results = {
-            "news": self._search_news(entity_name),
-            "promoter_news": self._search_promoter_news(promoters or []),
-            "mca_filings": self._search_mca(cin, entity_name),
-            "legal_cases": self._search_ecourts(entity_name),
-            "regulatory_actions": self._search_regulatory(entity_name),
-            "sector_trends": self._search_sector_trends(entity_name),
-            "credit_ratings": self._search_ratings(entity_name)
-        }
-        return results
-    
-    def _search_news(self, entity: str) -> List[Dict]:
-        """Search Indian business news"""
-        # Search Economic Times, Business Standard, Mint, etc.
-        sources = [
-            f"site:economictimes.indiatimes.com {entity}",
-            f"site:business-standard.com {entity}",
-            f"site:livemint.com {entity}"
-        ]
-        return []  # Integrate with Google News API or web scraping
-    
-    def _search_promoter_news(self, promoters: List[str]) -> List[Dict]:
-        """Search news about promoters"""
-        promoter_findings = []
-        for promoter in promoters:
-            # Search for negative news
-            negative_keywords = ["fraud", "scam", "investigation", "ED", "CBI", "SEBI"]
-            # Implement search logic
-            pass
-        return promoter_findings
-    
-    def _search_mca(self, cin: str, company_name: str) -> Dict:
-        """Search MCA portal for company filings"""
-        # Scrape or API call to MCA21
+    def research_entity(self, entity_name: str, cin: str = None, gstin: str = None) -> Dict:
+        """Perform web research with scraping and RAG analysis"""
+        if not self.client:
+            return {"summary": "Web research unavailable - set GROQ_API_KEY", "articles": []}
+        
+        print(f"🔍 Searching web for: {entity_name}")
+        
+        # Search and scrape articles
+        articles = self._search_and_scrape(entity_name)
+        
+        if not articles:
+            return {
+                "entity": entity_name,
+                "articles": [],
+                "summary": f"No significant web findings for {entity_name}",
+                "risk_flags": []
+            }
+        
+        # Use RAG to analyze scraped content
+        analysis = self._rag_analysis(entity_name, articles)
+        
         return {
-            "director_changes": [],
-            "charge_modifications": [],
-            "annual_returns_status": "Filed",
-            "compliance_score": 0.85
+            "entity": entity_name,
+            "articles": articles,
+            "summary": analysis.get("summary", ""),
+            "risk_flags": analysis.get("risk_flags", []),
+            "key_insights": analysis.get("insights", [])
         }
     
-    def _search_ecourts(self, entity: str) -> List[Dict]:
-        """Search e-Courts portal for litigation"""
-        # Scrape e-Courts CNR search
-        return []
-    
-    def _search_regulatory(self, entity: str) -> List[Dict]:
-        """Search RBI, SEBI, NCLT orders"""
-        regulatory_sources = [
-            "site:rbi.org.in",
-            "site:sebi.gov.in",
-            "site:nclt.gov.in"
+    def _search_and_scrape(self, entity: str) -> List[Dict]:
+        """Search and scrape articles from web"""
+        articles = []
+        
+        # Search queries focused on credit risk
+        queries = [
+            f"{entity} fraud scam investigation India",
+            f"{entity} default NPA legal case",
+            f"{entity} financial news India",
+            f"{entity} SEBI RBI regulatory action"
         ]
-        return []
+        
+        try:
+            with DDGS() as ddgs:
+                for query in queries:
+                    results = list(ddgs.text(query, max_results=3))
+                    
+                    for result in results:
+                        article = {
+                            "title": result.get("title", ""),
+                            "url": result.get("href", ""),
+                            "snippet": result.get("body", ""),
+                            "content": ""
+                        }
+                        
+                        # Try to scrape full content
+                        try:
+                            content = self._scrape_article(article["url"])
+                            article["content"] = content[:2000]  # Limit content
+                        except:
+                            article["content"] = article["snippet"]
+                        
+                        articles.append(article)
+                        
+                        if len(articles) >= 8:  # Limit total articles
+                            break
+                    
+                    if len(articles) >= 8:
+                        break
+        except Exception as e:
+            print(f"Search error: {e}")
+        
+        return articles
     
-    def _search_sector_trends(self, entity: str) -> Dict:
-        """Search for sector-specific headwinds/tailwinds"""
-        # Example: "RBI new regulations NBFC", "textile sector slowdown"
-        return {
-            "sector": "",
-            "trends": [],
-            "regulatory_changes": []
-        }
+    def _scrape_article(self, url: str) -> str:
+        """Scrape article content from URL"""
+        try:
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
+            response = requests.get(url, headers=headers, timeout=5)
+            soup = BeautifulSoup(response.content, 'html.parser')
+            
+            # Remove script and style elements
+            for script in soup(["script", "style", "nav", "footer", "header"]):
+                script.decompose()
+            
+            # Get text from article body
+            article_body = soup.find('article') or soup.find('main') or soup.body
+            if article_body:
+                text = article_body.get_text(separator=' ', strip=True)
+                return text[:2000]  # Limit to 2000 chars
+            
+            return ""
+        except:
+            return ""
     
-    def _search_ratings(self, entity: str) -> List[Dict]:
-        """Search CRISIL, ICRA, CARE ratings"""
-        return []
-    
-    def synthesize_findings(self, research_data: Dict) -> str:
-        """Synthesize research into narrative summary"""
-        summary = []
+    def _rag_analysis(self, entity: str, articles: List[Dict]) -> Dict:
+        """Use Groq RAG to analyze scraped articles"""
         
-        # News sentiment
-        news = research_data.get("news", [])
-        if news:
-            negative_news = [n for n in news if self._is_negative(n.get('title', ''))]
-            if negative_news:
-                summary.append(f"⚠️ {len(negative_news)} negative news articles found")
+        # Prepare context from articles
+        context = f"Entity: {entity}\n\n"
+        context += "ARTICLES FOUND:\n\n"
         
-        # Promoter concerns
-        promoter_news = research_data.get("promoter_news", [])
-        if promoter_news:
-            summary.append(f"⚠️ Promoter-related concerns: {len(promoter_news)} findings")
+        for i, article in enumerate(articles, 1):
+            context += f"[{i}] {article['title']}\n"
+            context += f"Source: {article['url']}\n"
+            content = article.get('content') or article.get('snippet', '')
+            context += f"Content: {content[:500]}...\n\n"
         
-        # MCA compliance
-        mca = research_data.get("mca_filings", {})
-        if mca.get("compliance_score", 1) < 0.7:
-            summary.append("⚠️ MCA compliance issues detected")
-        
-        # Litigation
-        legal = research_data.get("legal_cases", [])
-        if legal:
-            total_claim = sum([case.get('claim_amount', 0) for case in legal])
-            summary.append(f"⚠️ {len(legal)} legal cases found (Total claim: ₹{total_claim:,.0f})")
-        
-        # Regulatory actions
-        regulatory = research_data.get("regulatory_actions", [])
-        if regulatory:
-            summary.append(f"⚠️ {len(regulatory)} regulatory actions/orders found")
-        
-        # Sector trends
-        sector = research_data.get("sector_trends", {})
-        if sector.get("regulatory_changes"):
-            summary.append(f"ℹ️ Sector regulatory changes: {len(sector['regulatory_changes'])} identified")
-        
-        # Ratings
-        ratings = research_data.get("credit_ratings", [])
-        if ratings:
-            latest_rating = ratings[0]
-            summary.append(f"Credit Rating: {latest_rating.get('rating', 'N/A')} ({latest_rating.get('agency', 'N/A')})")
-        
-        return "\n".join(summary) if summary else "No significant findings from secondary research"
-    
-    def _is_negative(self, text: str) -> bool:
-        """Check if text contains negative keywords"""
-        negative_keywords = [
-            'fraud', 'scam', 'investigation', 'default', 'npa', 'wilful defaulter',
-            'insolvency', 'nclt', 'bankruptcy', 'sebi action', 'rbi penalty'
-        ]
-        return any(keyword in text.lower() for keyword in negative_keywords)
+        # RAG prompt for credit risk analysis
+        prompt = f"""You are a credit risk analyst. Analyze these web articles about "{entity}" and provide:
+
+1. SUMMARY: 2-3 sentence summary focusing on credit risks, fraud, defaults, legal issues, or regulatory actions
+2. RISK_FLAGS: List any risk flags found (fraud, default, legal, investigation, regulatory, insolvency)
+3. KEY_INSIGHTS: 3-4 bullet points of important findings
+
+Context:
+{context}
+
+Respond in JSON format:
+{{
+  "summary": "...",
+  "risk_flags": ["flag1", "flag2"],
+  "insights": ["insight1", "insight2", "insight3"]
+}}
+
+If no significant risks found, say "No significant adverse findings" in summary."""
+
+        try:
+            response = self.client.chat.completions.create(
+                model=self.model,
+                messages=[{"role": "user", "content": prompt}],
+                temperature=0,
+                max_tokens=1000
+            )
+            
+            content = response.choices[0].message.content
+            
+            # Parse JSON response
+            import json
+            if '```json' in content:
+                content = content.split('```json')[1].split('```')[0].strip()
+            elif '```' in content:
+                content = content.split('```')[1].split('```')[0].strip()
+            
+            result = json.loads(content)
+            
+            # Convert risk flags to emoji format
+            flag_map = {
+                'fraud': '🚨 Fraud allegations',
+                'scam': '🚨 Scam involvement',
+                'default': '⚠️ Payment defaults',
+                'npa': '⚠️ NPA classification',
+                'legal': '⚠️ Legal proceedings',
+                'investigation': '🚨 Under investigation',
+                'regulatory': '⚠️ Regulatory action',
+                'insolvency': '🚨 Insolvency proceedings'
+            }
+            
+            formatted_flags = []
+            for flag in result.get('risk_flags', []):
+                flag_lower = flag.lower()
+                for key, emoji_flag in flag_map.items():
+                    if key in flag_lower:
+                        formatted_flags.append(emoji_flag)
+                        break
+            
+            result['risk_flags'] = formatted_flags
+            return result
+            
+        except Exception as e:
+            print(f"RAG analysis error: {e}")
+            return {
+                "summary": "Analysis unavailable",
+                "risk_flags": [],
+                "insights": []
+            }

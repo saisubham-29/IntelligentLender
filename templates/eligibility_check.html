@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Credit Eligibility Check</title>
+    <style>
+        body { font-family: Arial; max-width: 600px; margin: 50px auto; padding: 20px; }
+        h2 { color: #2c3e50; }
+        .form-group { margin: 15px 0; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; }
+        button { background: #3498db; color: white; padding: 12px 30px; border: none; border-radius: 4px; cursor: pointer; margin-top: 20px; }
+        button:hover { background: #2980b9; }
+        #result { margin-top: 30px; padding: 20px; border-radius: 8px; display: none; }
+        .eligible { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; }
+        .not-eligible { background: #f8d7da; border: 1px solid #f5c6cb; color: #721c24; }
+        .result-title { font-size: 20px; font-weight: bold; margin-bottom: 10px; }
+        .result-details { margin-top: 10px; }
+        .result-details div { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h2>🎯 Quick Credit Eligibility Check</h2>
+    <p>Enter basic financial details to check loan eligibility using our trained ML model.</p>
+    
+    <form id="eligibilityForm">
+        <div class="form-group">
+            <label>Company Name:</label>
+            <input type="text" name="company_name" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Loan Amount Requested (₹):</label>
+            <input type="number" name="loan_amount" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Annual Revenue (₹):</label>
+            <input type="number" name="revenue" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Net Profit (₹):</label>
+            <input type="number" name="net_profit" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Total Assets (₹):</label>
+            <input type="number" name="total_assets" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Net Worth (₹):</label>
+            <input type="number" name="net_worth" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Total Debt (₹):</label>
+            <input type="number" name="total_debt" required>
+        </div>
+        
+        <div class="form-group">
+            <label>Credit Score:</label>
+            <input type="number" name="credit_score" value="700" min="300" max="900">
+        </div>
+        
+        <div class="form-group">
+            <label>Collateral Value (₹):</label>
+            <input type="number" name="collateral_value" value="0">
+        </div>
+        
+        <button type="submit">Check Eligibility</button>
+    </form>
+    
+    <div id="result"></div>
+    
+    <script>
+        document.getElementById('eligibilityForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            try {
+                const response = await fetch('/api/check_eligibility', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                const resultDiv = document.getElementById('result');
+                
+                if (result.success) {
+                    resultDiv.className = result.eligible ? 'eligible' : 'not-eligible';
+                    resultDiv.innerHTML = `
+                        <div class="result-title">${result.message}</div>
+                        <div class="result-details">
+                            <div><strong>Decision:</strong> ${result.decision}</div>
+                            <div><strong>Recommended Credit Limit:</strong> ₹${result.credit_limit.toLocaleString()}</div>
+                            <div><strong>Risk Premium:</strong> ${result.risk_premium_bps} bps</div>
+                            <div><strong>Approval Probability:</strong> ${result.approval_probability}%</div>
+                            <div><strong>Default Probability:</strong> ${result.default_probability}%</div>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.className = 'not-eligible';
+                    resultDiv.innerHTML = `<div class="result-title">Error: ${result.error}</div>`;
+                }
+                
+                resultDiv.style.display = 'block';
+            } catch (error) {
+                alert('Error: ' + error.message);
+            }
+        });
+    </script>
+</body>
+</html>

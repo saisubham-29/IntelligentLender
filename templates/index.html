@@ -52,16 +52,225 @@
         </div>
 
         <div class="tabs">
-            <div class="tab active" onclick="switchTab('quick')">Quick Decision</div>
-            <div class="tab" onclick="switchTab('site')">Site Visit</div>
-            <div class="tab" onclick="switchTab('interview')">Management Interview</div>
+            <div class="tab active" onclick="switchTab('upload')">📄 Upload Documents</div>
+            <div class="tab" onclick="switchTab('quick')">⚡ Quick Entry</div>
+            <div class="tab" onclick="switchTab('site')">🏭 Site Visit</div>
+            <div class="tab" onclick="switchTab('interview')">👔 Interview</div>
         </div>
 
         <div class="content">
             <div id="alert" class="alert"></div>
 
+            <!-- Upload Documents Tab -->
+            <div id="upload-tab" class="tab-content active">
+                <h2 style="margin-bottom: 30px; color: #667eea;">📄 Upload Documents & Process Application</h2>
+                <form id="upload-form" enctype="multipart/form-data">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Application ID *</label>
+                            <input type="text" name="applicant_id" required placeholder="APP-12345">
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name *</label>
+                            <input type="text" name="company_name" required placeholder="ABC Manufacturing Pvt Ltd">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Loan Amount Required (₹) *</label>
+                            <input type="number" name="loan_amount" required placeholder="5000000" min="1" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Loan Purpose *</label>
+                            <select name="loan_purpose" required>
+                                <option value="">Select...</option>
+                                <option value="Working Capital">Working Capital</option>
+                                <option value="Term Loan">Term Loan</option>
+                                <option value="Equipment Purchase">Equipment Purchase</option>
+                                <option value="Business Expansion">Business Expansion</option>
+                                <option value="Debt Refinancing">Debt Refinancing</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Tenure (Months) *</label>
+                            <input type="number" name="tenure_months" required value="60" min="12" max="240">
+                        </div>
+                        <div class="form-group">
+                            <label>Credit Score</label>
+                            <input type="number" name="credit_score" placeholder="720" min="300" max="900">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>CIN</label>
+                            <input type="text" name="cin" placeholder="U12345MH2015PTC123456">
+                        </div>
+                        <div class="form-group">
+                            <label>GSTIN</label>
+                            <input type="text" name="gstin" placeholder="27AABCU9603R1ZM">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Industry</label>
+                        <input type="text" name="industry" placeholder="Textile Manufacturing">
+                    </div>
+
+                    <h3 style="margin: 30px 0 20px; color: #667eea;">📎 Upload Financial Documents</h3>
+
+                    <h3 style="margin: 30px 0 20px; color: #667eea;">📎 Structured Data</h3>
+
+                    <div class="form-group">
+                        <label>GST Filing (PDF)</label>
+                        <input type="file" name="gst_filing" accept=".pdf">
+                        <small style="color: #666;">GSTR-1, GSTR-3B, or GSTR-9</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Income Tax Return (PDF)</label>
+                        <input type="file" name="itr" accept=".pdf">
+                        <small style="color: #666;">ITR-3, ITR-4, ITR-5, or ITR-6</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Bank Statement (PDF)</label>
+                        <input type="file" name="bank_statement" accept=".pdf">
+                        <small style="color: #666;">Last 6-12 months</small>
+                    </div>
+
+                    <h3 style="margin: 30px 0 20px; color: #667eea;">📄 Unstructured Data</h3>
+
+                    <div class="form-group">
+                        <label>Annual Report (PDF)</label>
+                        <input type="file" name="annual_report" accept=".pdf">
+                        <small style="color: #666;">Complete annual report with financials</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Financial Statement (PDF)</label>
+                        <input type="file" name="financial_statement" accept=".pdf">
+                        <small style="color: #666;">Balance sheet, P&L, Cash flow</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Board Meeting Minutes (PDF)</label>
+                        <input type="file" name="board_minutes" accept=".pdf">
+                        <small style="color: #666;">Recent board meeting minutes</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Credit Rating Report (PDF)</label>
+                        <input type="file" name="rating_report" accept=".pdf">
+                        <small style="color: #666;">CRISIL, ICRA, CARE, or India Ratings</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Shareholding Pattern (PDF)</label>
+                        <input type="file" name="shareholding" accept=".pdf">
+                        <small style="color: #666;">Latest shareholding pattern</small>
+                    </div>
+
+                    <h3 style="margin: 30px 0 20px; color: #667eea;">💰 Financial Details (Optional if uploading documents)</h3>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Annual Revenue (₹)</label>
+                            <input type="number" name="revenue" placeholder="50000000" min="0" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Net Profit (₹)</label>
+                            <input type="number" name="net_profit" placeholder="4000000" step="1">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Total Assets (₹)</label>
+                            <input type="number" name="total_assets" placeholder="60000000" min="0" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Net Worth (₹)</label>
+                            <input type="number" name="net_worth" placeholder="25000000" step="1">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Total Debt (₹)</label>
+                            <input type="number" name="total_debt" placeholder="20000000" min="0" step="1">
+                        </div>
+                        <div class="form-group">
+                            <label>Collateral Value (₹)</label>
+                            <input type="number" name="collateral_value" placeholder="80000000" min="0" step="1">
+                        </div>
+                    </div>
+
+                    <div class="loading" id="upload-loading">
+                        <div class="spinner"></div>
+                        <p style="margin-top: 15px; color: #667eea; font-weight: 600;">Processing documents & generating decision...</p>
+                    </div>
+
+                    <button type="submit" class="btn" id="upload-submit-btn">🚀 Process Application</button>
+                </form>
+
+                <div id="upload-result" class="result">
+                    <h2 id="upload-result-title"></h2>
+                    <div class="result-grid">
+                        <div class="result-item">
+                            <label>Requested Amount</label>
+                            <value id="upload-requested"></value>
+                        </div>
+                        <div class="result-item">
+                            <label>Approved Limit</label>
+                            <value id="upload-credit-limit"></value>
+                        </div>
+                        <div class="result-item">
+                            <label>Credit Bandwidth</label>
+                            <value id="upload-bandwidth" style="font-size: 1.2em;"></value>
+                        </div>
+                        <div class="result-item">
+                            <label>Risk Premium</label>
+                            <value id="upload-risk-premium"></value>
+                        </div>
+                        <div class="result-item">
+                            <label>LTV Ratio</label>
+                            <value id="upload-ltv"></value>
+                        </div>
+                        <div class="result-item">
+                            <label>Approval Probability</label>
+                            <value id="upload-approval-prob"></value>
+                        </div>
+                    </div>
+                    <div id="validation-alerts" style="margin-top: 20px;"></div>
+                    <div id="research-summary" style="margin-top: 20px; padding: 15px; background: #f8f9fa; border-radius: 8px; display: none;">
+                        <h3 style="color: #667eea; margin-bottom: 10px;">🔍 Web Research Findings</h3>
+                        <div id="research-content"></div>
+                        <div id="risk-flags" style="margin-top: 10px;"></div>
+                        <div id="key-insights" style="margin-top: 10px;"></div>
+                        <div id="article-sources" style="margin-top: 15px;"></div>
+                    </div>
+                    <div id="cam-report" style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px; display: none;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                            <h3 style="color: #667eea; margin: 0;">📄 Credit Appraisal Memo (CAM)</h3>
+                            <div>
+                                <button class="btn" onclick="openCAMInNewTab()" style="margin-right: 10px;">🔍 Open in New Tab</button>
+                                <button class="btn download-btn" id="upload-download-btn">📥 Download CAM</button>
+                            </div>
+                        </div>
+                        <div style="border: 1px solid #ddd; border-radius: 4px; background: white; padding: 15px; max-height: 600px; overflow-y: auto;">
+                            <pre id="cam-content" style="white-space: pre-wrap; font-family: monospace; font-size: 0.9em; line-height: 1.6; margin: 0;"></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Quick Decision Tab -->
-            <div id="quick-tab" class="tab-content active">
+            <div id="quick-tab" class="tab-content">
                 <h2 style="margin-bottom: 30px; color: #667eea;">Credit Application Assessment</h2>
                 <form id="quick-form">
                     <div class="form-row">
@@ -100,33 +309,33 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label>Annual Revenue (₹) *</label>
-                            <input type="number" name="revenue" required placeholder="50000000">
+                            <input type="number" name="revenue" required placeholder="50000000" min="1" step="1">
                         </div>
                         <div class="form-group">
                             <label>Net Profit (₹) *</label>
-                            <input type="number" name="net_profit" required placeholder="4000000">
+                            <input type="number" name="net_profit" required placeholder="4000000" step="1">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>Total Assets (₹) *</label>
-                            <input type="number" name="total_assets" required placeholder="60000000">
+                            <input type="number" name="total_assets" required placeholder="60000000" min="1" step="1">
                         </div>
                         <div class="form-group">
                             <label>Net Worth (₹) *</label>
-                            <input type="number" name="net_worth" required placeholder="25000000">
+                            <input type="number" name="net_worth" required placeholder="25000000" step="1">
                         </div>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>Total Debt (₹) *</label>
-                            <input type="number" name="total_debt" required placeholder="20000000">
+                            <input type="number" name="total_debt" required placeholder="20000000" min="0" step="1">
                         </div>
                         <div class="form-group">
                             <label>Collateral Value (₹)</label>
-                            <input type="number" name="collateral_value" placeholder="80000000">
+                            <input type="number" name="collateral_value" placeholder="80000000" min="0" step="1">
                         </div>
                     </div>
 
@@ -242,12 +451,166 @@
             setTimeout(() => alert.style.display = 'none', 5000);
         }
 
+        // Upload form handler
+        document.getElementById('upload-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            currentAppId = formData.get('applicant_id');
+            
+            // Validate required fields
+            const appId = formData.get('applicant_id');
+            const companyName = formData.get('company_name');
+            const loanAmount = parseFloat(formData.get('loan_amount'));
+            const loanPurpose = formData.get('loan_purpose');
+            
+            if (!appId || !companyName || !loanAmount || loanAmount <= 0 || !loanPurpose) {
+                showAlert('Please fill all required fields (Application ID, Company Name, Loan Amount, Loan Purpose)', 'error');
+                return;
+            }
+            
+            document.getElementById('upload-submit-btn').disabled = true;
+            document.getElementById('upload-loading').style.display = 'block';
+            document.getElementById('upload-result').style.display = 'none';
+            
+            try {
+                const response = await fetch('/api/process_with_files', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const result = await response.json();
+                
+                if (result.success) {
+                    const resultDiv = document.getElementById('upload-result');
+                    resultDiv.className = 'result ' + (result.decision === 'APPROVE' ? 'approve' : 'reject');
+                    resultDiv.style.display = 'block';
+                    
+                    document.getElementById('upload-result-title').textContent = 
+                        result.decision === 'APPROVE' ? '✅ Application APPROVED' : '❌ Application REJECTED';
+                    document.getElementById('upload-requested').textContent = '₹' + result.requested_amount.toLocaleString('en-IN');
+                    document.getElementById('upload-credit-limit').textContent = '₹' + result.credit_limit.toLocaleString('en-IN');
+                    document.getElementById('upload-bandwidth').textContent = result.credit_bandwidth || 'N/A';
+                    document.getElementById('upload-risk-premium').textContent = result.risk_premium + ' bps';
+                    document.getElementById('upload-ltv').textContent = result.ltv_ratio.toFixed(1) + '%';
+                    document.getElementById('upload-approval-prob').textContent = result.approval_probability.toFixed(1) + '%';
+                    
+                    // Show rejection reasons if rejected
+                    const validationDiv = document.getElementById('validation-alerts');
+                    validationDiv.innerHTML = '';
+                    
+                    if (result.validation_performed) {
+                        const val = result.validation_results;
+                        if (val.gst_bank) {
+                            const alert = document.createElement('div');
+                            alert.style.padding = '10px';
+                            alert.style.borderRadius = '5px';
+                            alert.style.marginTop = '10px';
+                            alert.style.background = val.gst_bank.is_suspicious ? '#f8d7da' : '#d4edda';
+                            alert.innerHTML = `<strong>GST-Bank Verification:</strong> ${val.gst_bank.variance_pct.toFixed(2)}% variance ${val.gst_bank.is_suspicious ? '⚠️ Suspicious' : '✓ Clear'}`;
+                            validationDiv.appendChild(alert);
+                        }
+                        if (val.circular_trading && val.circular_trading.detected) {
+                            const alert = document.createElement('div');
+                            alert.style.padding = '10px';
+                            alert.style.borderRadius = '5px';
+                            alert.style.marginTop = '10px';
+                            alert.style.background = '#f8d7da';
+                            alert.innerHTML = `<strong>⚠️ Circular Trading Detected:</strong> ${val.circular_trading.count} suspicious patterns`;
+                            validationDiv.appendChild(alert);
+                        }
+                    }
+                    
+                    // Show web research findings
+                    if (result.research_summary) {
+                        document.getElementById('research-summary').style.display = 'block';
+                        document.getElementById('research-content').textContent = result.research_summary;
+                        
+                        const flagsDiv = document.getElementById('risk-flags');
+                        flagsDiv.innerHTML = '';
+                        if (result.risk_flags && result.risk_flags.length > 0) {
+                            flagsDiv.innerHTML = '<strong>Risk Flags:</strong> ' + result.risk_flags.join(' ');
+                        }
+                        
+                        // Show key insights
+                        const insightsDiv = document.getElementById('key-insights');
+                        insightsDiv.innerHTML = '';
+                        if (result.key_insights && result.key_insights.length > 0) {
+                            insightsDiv.innerHTML = '<strong>Key Insights:</strong><ul style="margin:5px 0; padding-left:20px;">' + 
+                                result.key_insights.map(i => `<li>${i}</li>`).join('') + '</ul>';
+                        }
+                        
+                        // Show article sources
+                        const articlesDiv = document.getElementById('article-sources');
+                        articlesDiv.innerHTML = '';
+                        if (result.articles && result.articles.length > 0) {
+                            let articlesHtml = '<strong>📰 Sources (' + result.articles.length + ' articles):</strong><div style="margin-top:10px;">';
+                            result.articles.forEach((article, idx) => {
+                                articlesHtml += `<div style="margin:8px 0; padding:10px; background:white; border-radius:5px; border-left:3px solid #667eea;">
+                                    <strong>${idx + 1}. ${article.title}</strong><br>
+                                    <a href="${article.url}" target="_blank" style="color:#667eea; font-size:0.85em; text-decoration:none;">🔗 ${article.url}</a><br>
+                                    <span style="color:#666; font-size:0.9em;">${article.snippet || article.content.substring(0, 150)}...</span>
+                                </div>`;
+                            });
+                            articlesHtml += '</div>';
+                            articlesDiv.innerHTML = articlesHtml;
+                        }
+                    }
+                    
+                    // Show CAM report inline
+                    if (result.cam_document) {
+                        const camReport = document.getElementById('cam-report');
+                        camReport.style.display = 'block';
+                        document.getElementById('cam-content').textContent = result.cam_document;
+                        document.getElementById('upload-download-btn').style.display = 'inline-block';
+                        
+                        // Scroll to CAM report
+                        setTimeout(() => {
+                            camReport.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 300);
+                    }
+                    
+                    showAlert('Application processed successfully!', 'success');
+                    e.target.reset();  // Clear form after successful submission
+                } else {
+                    showAlert('Error: ' + result.error, 'error');
+                }
+            } catch (error) {
+                showAlert('Error: ' + error.message, 'error');
+            } finally {
+                document.getElementById('upload-submit-btn').disabled = false;
+                document.getElementById('upload-loading').style.display = 'none';
+            }
+        });
+
         document.getElementById('quick-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             
             const formData = new FormData(e.target);
             const data = Object.fromEntries(formData);
             currentAppId = data.applicant_id;
+            
+            // Validate required fields
+            if (!data.applicant_id || !data.company_name) {
+                showAlert('Please fill Application ID and Company Name', 'error');
+                return;
+            }
+            
+            const revenue = parseFloat(data.revenue);
+            const netProfit = parseFloat(data.net_profit);
+            const totalAssets = parseFloat(data.total_assets);
+            const netWorth = parseFloat(data.net_worth);
+            const totalDebt = parseFloat(data.total_debt);
+            
+            if (!revenue || !netProfit || !totalAssets || !netWorth || !totalDebt) {
+                showAlert('Please fill all financial fields with valid numbers', 'error');
+                return;
+            }
+            
+            if (revenue <= 0 || totalAssets <= 0) {
+                showAlert('Revenue and Total Assets must be greater than 0', 'error');
+                return;
+            }
             
             document.getElementById('submit-btn').disabled = true;
             document.getElementById('loading').style.display = 'block';
@@ -275,6 +638,7 @@
                     document.getElementById('default-prob').textContent = result.default_probability.toFixed(2) + '%';
                     
                     showAlert('Credit decision generated successfully!', 'success');
+                    e.target.reset();  // Clear form after successful submission
                 } else {
                     showAlert('Error generating decision', 'error');
                 }
@@ -337,6 +701,69 @@
         document.getElementById('download-btn').addEventListener('click', () => {
             window.location.href = '/api/download_cam/' + currentAppId;
         });
+
+        document.getElementById('upload-download-btn').addEventListener('click', () => {
+            window.location.href = '/api/download_cam/' + currentAppId;
+        });
+
+        function openCAMInNewTab() {
+            const camContent = document.getElementById('cam-content').textContent;
+            const newWindow = window.open('', '_blank');
+            newWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Credit Appraisal Memo - ${currentAppId}</title>
+                    <style>
+                        body { 
+                            font-family: 'Courier New', monospace; 
+                            padding: 40px; 
+                            max-width: 1000px; 
+                            margin: 0 auto;
+                            background: #f5f5f5;
+                        }
+                        .cam-container {
+                            background: white;
+                            padding: 40px;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        }
+                        pre { 
+                            white-space: pre-wrap; 
+                            line-height: 1.6; 
+                            font-size: 14px;
+                            margin: 0;
+                        }
+                        .print-btn {
+                            position: fixed;
+                            top: 20px;
+                            right: 20px;
+                            padding: 10px 20px;
+                            background: #667eea;
+                            color: white;
+                            border: none;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            font-size: 14px;
+                        }
+                        .print-btn:hover { background: #5568d3; }
+                        @media print {
+                            .print-btn { display: none; }
+                            body { background: white; padding: 0; }
+                            .cam-container { box-shadow: none; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <button class="print-btn" onclick="window.print()">🖨️ Print</button>
+                    <div class="cam-container">
+                        <pre>${camContent}</pre>
+                    </div>
+                </body>
+                </html>
+            `);
+            newWindow.document.close();
+        }
     </script>
 </body>
 </html>

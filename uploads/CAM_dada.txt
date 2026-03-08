@@ -1,0 +1,226 @@
+
+==========================================================================================
+                    COMPREHENSIVE CREDIT APPRAISAL MEMORANDUM (CAM)
+                              CONFIDENTIAL - FOR INTERNAL USE ONLY
+==========================================================================================
+
+REFERENCE NO.: CAM/dada/20260307
+DATE OF APPRAISAL: 07 March 2026
+PREPARED BY: Credit Risk Analytics Engine
+REVIEWED BY: Branch Credit Manager
+
+==========================================================================================
+SECTION I: BORROWER IDENTIFICATION & FACILITY DETAILS
+==========================================================================================
+
+A. BORROWER PARTICULARS
+   Legal Name of Entity        : dasdd
+   Corporate Identity Number   : afafsc ras12d89a70
+   Goods & Services Tax Number : 27aabxcsdaa
+   Industry Classification     : 
+   Constitution                : Private Limited Company
+   Date of Incorporation       : N/A
+
+B. FACILITY REQUESTED
+   Nature of Facility          : Working Capital
+   Quantum Sought              : ₹850,221,450.00
+   Tenure                      : 120 months
+   Proposed End-Use            : Working Capital
+   Security Offered            : Collateral worth ₹100,000.00
+
+C. CREDIT RECOMMENDATION
+   Decision                    : APPROVE
+   Sanctioned Amount           : ₹75,000.00
+   Risk-Adjusted Pricing       : Base Rate + 190.0 bps
+   Credit Rating (Internal)    : AAA (Excellent)
+   Probability of Default      : 5.00%
+   Risk Appetite Classification: MODERATE RISK
+
+==========================================================================================
+SECTION II: CREDIT RISK ASSESSMENT - THE FIVE Cs FRAMEWORK
+==========================================================================================
+
+1. CHARACTER - INTEGRITY & TRACK RECORD
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Management & Promoter Profile
+      • Promoter/Director Details : As per KYC documents
+      • Vintage in Business       : N/A years
+      • Industry Experience       : N/A years
+      • Educational Qualification : Graduate/Post-Graduate
+      • Previous Banking Relations: Multiple banks
+
+   B. Credit Bureau Analysis (CIBIL/Experian/Equifax/CRIF)
+      • Composite Credit Score    : 752 (Excellent)
+      • Total Credit Facilities   : 1 accounts
+      • Aggregate Exposure        : ₹306,079,722.00
+      • Credit Utilization Ratio  : 50.0%
+      • Delinquency Instances     : 0 (Last 24 months)
+      • Days Past Due (DPD)       : 0 DPD - Clean
+      • Suit Filed/Written Off    : NIL
+
+   C. Regulatory & Statutory Compliance
+      • GST Filing Status         : Regular
+      • Income Tax Returns        : Filed up to AY 2025-26
+      • ROC Compliance            : Active & Compliant
+      • MSME Registration         : N/A
+      • Environmental Clearances  : As applicable
+
+   D. Market Intelligence & Reputation
+Loan Purpose: Working Capital
+Tenure: 120 months
+
+WEB RESEARCH FINDINGS:
+No significant web findings for dasdd
+
+Documents uploaded: financial_statement
+
+
+2. CAPACITY - CASH FLOW & DEBT SERVICING ABILITY
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Operating Performance Analysis (₹ in Lakhs)
+      • Gross Turnover            : ₹17,004.43 lakhs
+      • EBITDA                    : ₹2,040.53 lakhs
+      • EBITDA Margin             : 12.00%
+      • Profit After Tax (PAT)    : ₹1,360.35 lakhs
+      • PAT Margin                : 8.00%
+      • Return on Assets (ROA)    : 6.67%
+      • Return on Equity (ROE)    : 16.67%
+
+   B. Debt Servicing Coverage Ratios
+      • DSCR (Debt Service Coverage): 1.50x ✓ ADEQUATE
+      • Interest Coverage Ratio   : 2.50x ✓ COMFORTABLE
+      • Fixed Charge Coverage     : 1.50x
+
+   C. GST Turnover Analysis & Cross-Verification
+      • GST Turnover (TTM)        : ₹0.00
+      • Average Monthly GST       : ₹0.00
+      • GST Compliance Rating     : Good
+
+3. CAPITAL - NET WORTH & FINANCIAL POSITION
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Balance Sheet Strength (₹ in Lakhs)
+      • Total Assets              : ₹20,405.31 lakhs
+      • Tangible Net Worth (TNW)  : ₹734,591,332.80 lakhs
+      • Net Worth                 : ₹8,162.13 lakhs
+      • Total Outside Liabilities : ₹6,121.59 lakhs
+      • Adjusted Net Worth        : ₹7,549.97 lakhs
+
+   B. Leverage & Gearing Ratios
+      • Debt-to-Equity Ratio      : 0.75x ✓ OPTIMAL
+      • Total Outside Liabilities/TNW: 0.00x
+      • Long-term Debt/Equity     : 0.80x
+      • Gearing Ratio             : 30.0%
+
+   C. Liquidity Position
+      • Current Ratio             : 2.08x ✓ ADEQUATE
+      • Quick Ratio               : 1.00x
+      • Working Capital           : ₹2,652.69 lakhs
+      • Cash & Bank Balance       : ₹0.00 lakhs
+
+4. COLLATERAL - SECURITY COVERAGE
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Primary Security
+      • Nature of Security        : Hypothecation of Stock & Receivables
+      • Collateral Value          : ₹100,000.00
+      • Loan-to-Value (LTV) Ratio : 75.0%
+      • Margin Stipulated         : 25%
+      • Valuation Date            : 07-Mar-2026
+      • Valuer                    : Approved Panel Valuer
+
+   B. Collateral Security
+      • Immovable Property        : As per valuation report
+      • Personal Guarantee        : Promoters/Directors
+      • Corporate Guarantee       : N/A
+
+5. CONDITIONS - EXTERNAL FACTORS & INDUSTRY OUTLOOK
+──────────────────────────────────────────────────────────────────────────────────────────
+
+   A. Industry Analysis
+      • Industry Segment          : 
+      • Market Position           : Mid-tier player
+      • Competitive Landscape     : Moderate competition
+      • Growth Outlook            : Stable to Positive
+
+   B. Business Risk Factors
+      • Concentration Risk        : Diversified customer base
+      • Regulatory Risk           : Low
+      • Technology Obsolescence   : Low
+      • Supply Chain Risk         : Moderate
+
+==========================================================================================
+SECTION III: RISK MITIGATION & COVENANTS
+==========================================================================================
+
+A. FINANCIAL COVENANTS
+   • Minimum DSCR              : 1.25x (to be maintained quarterly)
+   • Maximum Debt/Equity       : 2.5x
+   • Minimum TNW               : ₹7,345.91 lakhs
+   • Current Ratio             : Minimum 1.25x
+
+B. OPERATIONAL COVENANTS
+   • Quarterly Financial Statements to be submitted within 45 days
+   • Annual Audited Financials within 6 months of FY end
+   • Stock & Receivables statements monthly
+   • GST returns & ITR to be filed regularly
+   • Prior approval for capital expenditure > ₹7,500
+
+C. MONITORING MECHANISM
+   • Monthly stock audit by approved auditors
+   • Quarterly review of financial performance
+   • Annual renewal with updated financials
+   • Credit bureau monitoring (quarterly)
+
+==========================================================================================
+SECTION IV: DECISION RATIONALE & RISK ASSESSMENT
+==========================================================================================
+
+A. QUANTITATIVE RISK SCORING
+
+   Parameter                    Value        Threshold    Status
+   ──────────────────────────────────────────────────────────────────────
+   Credit Score                    752.00       600.00   ✓ PASS
+   Debt To Income                    0.36         0.65   ✓ PASS
+   Current Ratio                     2.08         0.75   ✓ PASS
+   Delinquency Count                 0.00         2.00   ✓ PASS
+   Profit Margin                     0.08        -0.10   ✓ PASS
+
+C. CREDIT DECISION SUMMARY
+   • ML Model Confidence       : 100.0%
+   • Risk-Adjusted Return      : N/A
+   • Economic Capital Required : ₹3,750.00
+   • Expected Loss             : ₹1,687.50
+
+==========================================================================================
+SECTION V: RECOMMENDATION & APPROVAL
+==========================================================================================
+
+FINAL RECOMMENDATION: APPROVE
+
+The credit facility is RECOMMENDED FOR APPROVAL based on:
+   ✓ Satisfactory financial performance and debt servicing capacity
+   ✓ Adequate collateral coverage (LTV: 75.0%)
+   ✓ Acceptable credit history and management track record
+   ✓ Compliance with internal risk parameters
+
+SANCTIONED TERMS:
+   Facility Amount : ₹75,000.00
+   Interest Rate   : Base Rate + 190.0 bps
+   Tenure          : 120 months
+   Security        : As detailed in Section II.4
+
+
+──────────────────────────────────────────────────────────────────────────────────────────
+PREPARED BY:                           REVIEWED BY:                    APPROVED BY:
+Credit Analytics Engine                Branch Credit Manager           Regional Credit Head
+Date: 07-Mar-2026
+
+==========================================================================================
+                                    END OF CAM
+==========================================================================================
+
+DISCLAIMER: This CAM is generated using AI/ML models and should be reviewed by authorized 
+credit officers before final sanction. All information is subject to verification.

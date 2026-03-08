@@ -1,0 +1,121 @@
+================================================================================
+CREDIT APPRAISAL MEMO (CAM)
+================================================================================
+
+Date: 08 March 2026
+Application ID: MAR26-001
+Company Name: aditybirlafinance
+CIN: 
+
+Loan Amount Requested: ₹23,245,352,525,523,562,507,796,480
+Purpose: Term Loan
+Tenure: 60 months
+
+================================================================================
+EXECUTIVE SUMMARY
+================================================================================
+
+Decision: APPROVE
+Approved Amount: ₹15,923,066,479,983,641,713,704,960
+Interest Rate: 12.88%
+Risk Premium: 288 bps
+
+✅ APPROVED for ₹15,923,066,479,983,641,713,704,960 at 12.88% interest
+Confidence: HIGH
+
+📊 DECISION FACTORS:
+  ✓ Clean promoter background
+  ❌ 4 litigation cases found - high legal risk
+  ❌ 2 regulatory action(s) found
+  ✓ Strong DSCR: 1.50 (>1.5)
+  ✓ High capacity utilization: 100%
+  ✓ Conservative leverage: D/E = 0.75
+  ✓ Strong equity base: ₹22,315,538,424,502,620,866,478,080
+  ⚠️ No collateral offered
+  ⚠️ Sector headwinds: 1 challenges identified
+  ✓ Positive news sentiment
+
+📋 FIVE Cs OF CREDIT:
+  Character: 35/100
+  Capacity: 95/100
+  Capital: 95/100
+  Collateral: 60/100
+  Conditions: 60/100
+  Overall Score: 71/100
+
+================================================================================
+FIVE Cs OF CREDIT ANALYSIS
+================================================================================
+
+1. CHARACTER
+   Score: 35/100
+   Promoter Background: UNKNOWN
+   Litigation Cases: 4
+   Regulatory Actions: 2
+
+2. CAPACITY
+   Score: 95/100
+   Revenue: ₹46,490,705,051,047,125,015,592,960
+   EBITDA: ₹5,578,884,606,125,655,216,619,520
+   DSCR: 1.50
+
+3. CAPITAL
+   Score: 95/100
+   Net Worth: ₹22,315,538,424,502,620,866,478,080
+   Total Debt: ₹16,736,653,818,376,964,576,116,736
+   Debt/Equity: 0.75
+
+4. COLLATERAL
+   Score: 60/100
+   Collateral Value: ₹0
+
+5. CONDITIONS
+   Score: 60/100
+   Sector: 
+   News Sentiment: POSITIVE
+   Sector Headwinds: 1
+   Sector Tailwinds: 0
+
+================================================================================
+SECONDARY RESEARCH FINDINGS
+================================================================================
+
+Research Risk Score: 62/100
+Synthesis: The credit decision for Aditya Birla Finance poses key risks, primarily driven by high litigation risk with 4 ongoing cases. Additionally, the company operates in a sector with evolving trends and regulatory changes, such as new rules for gold loans and digital banking fraud protection, which may impact credit risk assessment. The medium regulatory risk with 2 actions also warrants attention. Overall, a thorough evaluation of these risks is necessary to make an informed credit decision.
+
+Key Findings:
+  • Promoter Risk: UNKNOWN
+  • 4 litigation case(s) found
+  • 2 regulatory action(s) found
+  • Sector headwinds: 1 identified
+
+================================================================================
+RECOMMENDATION
+================================================================================
+
+✅ APPROVED for ₹15,923,066,479,983,641,713,704,960 at 12.88% interest
+Confidence: HIGH
+
+📊 DECISION FACTORS:
+  ✓ Clean promoter background
+  ❌ 4 litigation cases found - high legal risk
+  ❌ 2 regulatory action(s) found
+  ✓ Strong DSCR: 1.50 (>1.5)
+  ✓ High capacity utilization: 100%
+  ✓ Conservative leverage: D/E = 0.75
+  ✓ Strong equity base: ₹22,315,538,424,502,620,866,478,080
+  ⚠️ No collateral offered
+  ⚠️ Sector headwinds: 1 challenges identified
+  ✓ Positive news sentiment
+
+📋 FIVE Cs OF CREDIT:
+  Character: 35/100
+  Capacity: 95/100
+  Capital: 95/100
+  Collateral: 60/100
+  Conditions: 60/100
+  Overall Score: 71/100
+
+================================================================================
+END OF CREDIT APPRAISAL MEMO
+================================================================================

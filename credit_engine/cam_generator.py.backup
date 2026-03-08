@@ -1,0 +1,453 @@
+"""Generate Comprehensive Credit Appraisal Memo (CAM) - Branch Manager Grade"""
+from typing import Dict
+from datetime import datetime
+import pandas as pd
+
+class CAMGenerator:
+    def __init__(self):
+        pass
+    
+    def generate_memo(self, applicant_data: Dict, financial_data: pd.DataFrame,
+                     credit_history: pd.DataFrame, research_summary: str,
+                     ml_decision: Dict, feature_importance: Dict,
+                     validation_results: Dict = None, primary_insights: str = None) -> str:
+        """Generate comprehensive CAM document with Five Cs framework - Branch Manager Grade"""
+        
+        memo = f"""
+{'='*90}
+                    COMPREHENSIVE CREDIT APPRAISAL MEMORANDUM (CAM)
+                              CONFIDENTIAL - FOR INTERNAL USE ONLY
+{'='*90}
+
+REFERENCE NO.: CAM/{applicant_data.get('applicant_id', 'N/A')}/{datetime.now().strftime('%Y%m%d')}
+DATE OF APPRAISAL: {datetime.now().strftime('%d %B %Y')}
+PREPARED BY: Credit Risk Analytics Engine
+REVIEWED BY: Branch Credit Manager
+
+{'='*90}
+SECTION I: BORROWER IDENTIFICATION & FACILITY DETAILS
+{'='*90}
+
+A. BORROWER PARTICULARS
+   Legal Name of Entity        : {applicant_data.get('name', 'N/A')}
+   Corporate Identity Number   : {applicant_data.get('cin', 'N/A')}
+   Goods & Services Tax Number : {applicant_data.get('gstin', 'N/A')}
+   Industry Classification     : {applicant_data.get('industry', 'N/A')}
+   Constitution                : {applicant_data.get('constitution', 'Private Limited Company')}
+   Date of Incorporation       : {applicant_data.get('incorporation_date', 'N/A')}
+
+B. FACILITY REQUESTED
+   Nature of Facility          : {applicant_data.get('loan_purpose', 'Term Loan')}
+   Quantum Sought              : ₹{applicant_data.get('loan_amount_requested', 0):,.2f}
+   Tenure                      : {applicant_data.get('tenure_months', 60)} months
+   Proposed End-Use            : {applicant_data.get('loan_purpose', 'Working Capital/Business Expansion')}
+   Security Offered            : {self._format_security(applicant_data)}
+
+C. CREDIT RECOMMENDATION
+   Decision                    : {ml_decision['decision']}
+   Sanctioned Amount           : ₹{ml_decision['credit_limit']:,.2f}
+   Risk-Adjusted Pricing       : Base Rate + {ml_decision['risk_premium_bps']} bps
+   Credit Rating (Internal)    : {self._derive_rating(ml_decision['approval_probability'])}
+   Probability of Default      : {ml_decision['default_probability']*100:.2f}%
+   Risk Appetite Classification: {self._risk_classification(ml_decision['default_probability'])}
+
+{'='*90}
+SECTION II: CREDIT RISK ASSESSMENT - THE FIVE Cs FRAMEWORK
+{'='*90}
+
+1. CHARACTER - INTEGRITY & TRACK RECORD
+{'─'*90}
+
+   A. Management & Promoter Profile
+      • Promoter/Director Details : {applicant_data.get('promoters', 'As per KYC documents')}
+      • Vintage in Business       : {applicant_data.get('years_in_business', 'N/A')} years
+      • Industry Experience       : {applicant_data.get('industry_experience', 'N/A')} years
+      • Educational Qualification : {applicant_data.get('education', 'Graduate/Post-Graduate')}
+      • Previous Banking Relations: {applicant_data.get('banking_relations', 'Multiple banks')}
+
+   B. Credit Bureau Analysis (CIBIL/Experian/Equifax/CRIF)
+"""
+        if not credit_history.empty:
+            cibil_score = credit_history.get('credit_score', [0])[0] if 'credit_score' in credit_history else 0
+            memo += f"""      • Composite Credit Score    : {cibil_score} ({self._score_grade(cibil_score)})
+      • Total Credit Facilities   : {len(credit_history)} accounts
+      • Aggregate Exposure        : ₹{credit_history.get('balance', pd.Series([0])).sum():,.2f}
+      • Credit Utilization Ratio  : {(credit_history.get('balance', pd.Series([0])).sum() / max(credit_history.get('credit_limit', pd.Series([1])).sum(), 1))*100:.1f}%
+      • Delinquency Instances     : {credit_history.get('delinquent', pd.Series([0])).sum()} (Last 24 months)
+      • Days Past Due (DPD)       : {self._dpd_status(credit_history)}
+      • Suit Filed/Written Off    : {applicant_data.get('suit_filed', 'NIL')}
+"""
+        
+        memo += f"""
+   C. Regulatory & Statutory Compliance
+      • GST Filing Status         : {applicant_data.get('gst_compliance', 'Regular')}
+      • Income Tax Returns        : {applicant_data.get('itr_filed', 'Filed up to AY 2025-26')}
+      • ROC Compliance            : {applicant_data.get('roc_status', 'Active & Compliant')}
+      • MSME Registration         : {applicant_data.get('msme_reg', 'N/A')}
+      • Environmental Clearances  : {applicant_data.get('env_clearance', 'As applicable')}
+
+   D. Market Intelligence & Reputation
+{research_summary}
+
+2. CAPACITY - CASH FLOW & DEBT SERVICING ABILITY
+{'─'*90}
+
+   A. Operating Performance Analysis (₹ in Lakhs)
+"""
+        if not financial_data.empty:
+            latest = financial_data.iloc[0]
+            revenue_lakhs = latest.get('revenue', 0) / 100000
+            ebitda_lakhs = latest.get('ebitda', 0) / 100000
+            pat_lakhs = latest.get('net_profit', 0) / 100000
+            
+            memo += f"""      • Gross Turnover            : ₹{revenue_lakhs:,.2f} lakhs
+      • EBITDA                    : ₹{ebitda_lakhs:,.2f} lakhs
+      • EBITDA Margin             : {(latest.get('ebitda', 0) / max(latest.get('revenue', 1), 1))*100:.2f}%
+      • Profit After Tax (PAT)    : ₹{pat_lakhs:,.2f} lakhs
+      • PAT Margin                : {(latest.get('net_profit', 0) / max(latest.get('revenue', 1), 1))*100:.2f}%
+      • Return on Assets (ROA)    : {(latest.get('net_profit', 0) / max(latest.get('total_assets', 1), 1))*100:.2f}%
+      • Return on Equity (ROE)    : {(latest.get('net_profit', 0) / max(latest.get('net_worth', 1), 1))*100:.2f}%
+
+   B. Debt Servicing Coverage Ratios
+      • DSCR (Debt Service Coverage): {latest.get('dscr', 0):.2f}x {'✓ ADEQUATE' if latest.get('dscr', 0) >= 1.25 else '⚠️ WEAK'}
+      • Interest Coverage Ratio   : {latest.get('interest_coverage', 0):.2f}x {'✓ COMFORTABLE' if latest.get('interest_coverage', 0) >= 2.0 else '⚠️ STRESSED'}
+      • Fixed Charge Coverage     : {latest.get('fixed_charge_coverage', 1.5):.2f}x
+"""
+        
+        memo += f"""
+   C. GST Turnover Analysis & Cross-Verification
+      • GST Turnover (TTM)        : ₹{applicant_data.get('gst_turnover', 0):,.2f}
+      • Average Monthly GST       : ₹{applicant_data.get('gst_turnover', 0)/12:,.2f}
+      • GST Compliance Rating     : {applicant_data.get('gst_rating', 'Good')}
+"""
+        
+        if validation_results and validation_results.get('gst_bank'):
+            gst_bank = validation_results['gst_bank']
+            memo += f"""      • GST vs Bank Statement Variance: {gst_bank.get('variance_pct', 0):.2f}% {'✓ ACCEPTABLE' if gst_bank.get('variance_pct', 0) < 10 else '⚠️ HIGH VARIANCE'}
+      • Circular Trading Detection: {'⚠️ SUSPICIOUS PATTERNS DETECTED' if gst_bank.get('is_suspicious') else '✓ NO ANOMALIES'}
+"""
+        
+        memo += f"""
+3. CAPITAL - NET WORTH & FINANCIAL POSITION
+{'─'*90}
+
+   A. Balance Sheet Strength (₹ in Lakhs)
+"""
+        if not financial_data.empty:
+            latest = financial_data.iloc[0]
+            assets_lakhs = latest.get('total_assets', 0) / 100000
+            networth_lakhs = latest.get('net_worth', 0) / 100000
+            debt_lakhs = latest.get('total_debt', 0) / 100000
+            tnw_lakhs = latest.get('tangible_net_worth', networth_lakhs * 0.9)
+            
+            memo += f"""      • Total Assets              : ₹{assets_lakhs:,.2f} lakhs
+      • Tangible Net Worth (TNW)  : ₹{tnw_lakhs:,.2f} lakhs
+      • Net Worth                 : ₹{networth_lakhs:,.2f} lakhs
+      • Total Outside Liabilities : ₹{debt_lakhs:,.2f} lakhs
+      • Adjusted Net Worth        : ₹{(networth_lakhs - (debt_lakhs * 0.1)):,.2f} lakhs
+
+   B. Leverage & Gearing Ratios
+      • Debt-to-Equity Ratio      : {(latest.get('total_debt', 0) / max(latest.get('net_worth', 1), 1)):.2f}x {'✓ OPTIMAL' if (latest.get('total_debt', 0) / max(latest.get('net_worth', 1), 1)) < 2.0 else '⚠️ HIGHLY LEVERAGED'}
+      • Total Outside Liabilities/TNW: {(latest.get('total_debt', 0) / max(tnw_lakhs * 100000, 1)):.2f}x
+      • Long-term Debt/Equity     : {applicant_data.get('ltd_equity', 0.8):.2f}x
+      • Gearing Ratio             : {(latest.get('total_debt', 0) / max(latest.get('total_assets', 1), 1))*100:.1f}%
+
+   C. Liquidity Position
+      • Current Ratio             : {(latest.get('current_assets', 0) / max(latest.get('current_liabilities', 1), 1)):.2f}x {'✓ ADEQUATE' if (latest.get('current_assets', 0) / max(latest.get('current_liabilities', 1), 1)) >= 1.33 else '⚠️ TIGHT'}
+      • Quick Ratio               : {applicant_data.get('quick_ratio', 1.0):.2f}x
+      • Working Capital           : ₹{(latest.get('current_assets', 0) - latest.get('current_liabilities', 0))/100000:,.2f} lakhs
+      • Cash & Bank Balance       : ₹{applicant_data.get('cash_balance', 0)/100000:,.2f} lakhs
+
+4. COLLATERAL - SECURITY COVERAGE
+{'─'*90}
+
+   A. Primary Security
+      • Nature of Security        : {applicant_data.get('security_type', 'Hypothecation of Stock & Receivables')}
+      • Collateral Value          : ₹{applicant_data.get('collateral_value', 0):,.2f}
+      • Loan-to-Value (LTV) Ratio : {(ml_decision['credit_limit'] / max(applicant_data.get('collateral_value', 1), 1))*100:.1f}%
+      • Margin Stipulated         : {applicant_data.get('margin', '25%')}
+      • Valuation Date            : {applicant_data.get('valuation_date', datetime.now().strftime('%d-%b-%Y'))}
+      • Valuer                    : {applicant_data.get('valuer', 'Approved Panel Valuer')}
+
+   B. Collateral Security
+      • Immovable Property        : {applicant_data.get('property_security', 'As per valuation report')}
+      • Personal Guarantee        : {applicant_data.get('guarantors', 'Promoters/Directors')}
+      • Corporate Guarantee       : {applicant_data.get('corp_guarantee', 'N/A')}
+
+5. CONDITIONS - EXTERNAL FACTORS & INDUSTRY OUTLOOK
+{'─'*90}
+
+   A. Industry Analysis
+      • Industry Segment          : {applicant_data.get('industry', 'N/A')}
+      • Market Position           : {applicant_data.get('market_position', 'Mid-tier player')}
+      • Competitive Landscape     : {applicant_data.get('competition', 'Moderate competition')}
+      • Growth Outlook            : {applicant_data.get('growth_outlook', 'Stable to Positive')}
+
+   B. Business Risk Factors
+      • Concentration Risk        : {applicant_data.get('concentration_risk', 'Diversified customer base')}
+      • Regulatory Risk           : {applicant_data.get('regulatory_risk', 'Low')}
+      • Technology Obsolescence   : {applicant_data.get('tech_risk', 'Low')}
+      • Supply Chain Risk         : {applicant_data.get('supply_risk', 'Moderate')}
+
+{'='*90}
+SECTION III: RISK MITIGATION & COVENANTS
+{'='*90}
+
+A. FINANCIAL COVENANTS
+   • Minimum DSCR              : 1.25x (to be maintained quarterly)
+   • Maximum Debt/Equity       : 2.5x
+   • Minimum TNW               : ₹{(networth_lakhs * 0.9):,.2f} lakhs
+   • Current Ratio             : Minimum 1.25x
+
+B. OPERATIONAL COVENANTS
+   • Quarterly Financial Statements to be submitted within 45 days
+   • Annual Audited Financials within 6 months of FY end
+   • Stock & Receivables statements monthly
+   • GST returns & ITR to be filed regularly
+   • Prior approval for capital expenditure > ₹{ml_decision['credit_limit'] * 0.1:,.0f}
+
+C. MONITORING MECHANISM
+   • Monthly stock audit by approved auditors
+   • Quarterly review of financial performance
+   • Annual renewal with updated financials
+   • Credit bureau monitoring (quarterly)
+
+{'='*90}
+SECTION IV: DECISION RATIONALE & RISK ASSESSMENT
+{'='*90}
+
+A. QUANTITATIVE RISK SCORING
+"""
+        
+        if ml_decision.get('key_factors'):
+            memo += "\n   Parameter                    Value        Threshold    Status\n   " + "─"*70 + "\n"
+            for key, val in ml_decision['key_factors'].items():
+                status_icon = '✓ PASS' if val['status'] == 'PASS' else '✗ FAIL'
+                param_name = key.replace('_', ' ').title().ljust(25)
+                value_str = f"{val['value']:.2f}".rjust(12) if isinstance(val['value'], (int, float)) else str(val['value']).rjust(12)
+                threshold_str = f"{val['threshold']:.2f}".rjust(12) if isinstance(val['threshold'], (int, float)) else str(val['threshold']).rjust(12)
+                memo += f"   {param_name} {value_str} {threshold_str}   {status_icon}\n"
+        
+        if ml_decision.get('rejection_reasons'):
+            memo += f"\nB. ADVERSE FACTORS IDENTIFIED\n"
+            for idx, reason in enumerate(ml_decision['rejection_reasons'], 1):
+                memo += f"   {idx}. {reason}\n"
+        
+        memo += f"""
+C. CREDIT DECISION SUMMARY
+   • ML Model Confidence       : {ml_decision['approval_probability']*100:.1f}%
+   • Risk-Adjusted Return      : {applicant_data.get('raroc', 'N/A')}
+   • Economic Capital Required : ₹{ml_decision['credit_limit'] * ml_decision['default_probability']:,.2f}
+   • Expected Loss             : ₹{ml_decision['credit_limit'] * ml_decision['default_probability'] * 0.45:,.2f}
+
+{'='*90}
+SECTION V: RECOMMENDATION & APPROVAL
+{'='*90}
+
+FINAL RECOMMENDATION: {ml_decision['decision']}
+
+"""
+        if ml_decision['decision'] == 'APPROVE':
+            memo += f"""The credit facility is RECOMMENDED FOR APPROVAL based on:
+   ✓ Satisfactory financial performance and debt servicing capacity
+   ✓ Adequate collateral coverage (LTV: {(ml_decision['credit_limit'] / max(applicant_data.get('collateral_value', 1), 1))*100:.1f}%)
+   ✓ Acceptable credit history and management track record
+   ✓ Compliance with internal risk parameters
+
+SANCTIONED TERMS:
+   Facility Amount : ₹{ml_decision['credit_limit']:,.2f}
+   Interest Rate   : Base Rate + {ml_decision['risk_premium_bps']} bps
+   Tenure          : {applicant_data.get('tenure_months', 60)} months
+   Security        : As detailed in Section II.4
+"""
+        else:
+            memo += f"""The credit facility is RECOMMENDED FOR REJECTION due to:
+"""
+            for reason in ml_decision.get('rejection_reasons', ['Inadequate risk-return profile']):
+                memo += f"   ✗ {reason}\n"
+            
+            memo += f"""
+ALTERNATIVE RECOMMENDATION:
+   • Applicant may reapply after addressing the above concerns
+   • Consider lower quantum with enhanced security
+   • Explore co-borrower/guarantor options
+"""
+        
+        memo += f"""
+
+{'─'*90}
+PREPARED BY:                           REVIEWED BY:                    APPROVED BY:
+Credit Analytics Engine                Branch Credit Manager           Regional Credit Head
+Date: {datetime.now().strftime('%d-%b-%Y')}
+
+{'='*90}
+                                    END OF CAM
+{'='*90}
+
+DISCLAIMER: This CAM is generated using AI/ML models and should be reviewed by authorized 
+credit officers before final sanction. All information is subject to verification.
+"""
+        
+        return memo
+    
+    def _format_security(self, applicant: Dict) -> str:
+        if applicant.get('collateral_value', 0) > 0:
+            return f"Collateral worth ₹{applicant['collateral_value']:,.2f}"
+        return "Hypothecation of current assets"
+    
+    def _derive_rating(self, prob: float) -> str:
+        if prob >= 0.9: return "AAA (Excellent)"
+        if prob >= 0.8: return "AA (Very Good)"
+        if prob >= 0.7: return "A (Good)"
+        if prob >= 0.6: return "BBB (Satisfactory)"
+        if prob >= 0.5: return "BB (Marginal)"
+        return "B/C (High Risk)"
+    
+    def _risk_classification(self, default_prob: float) -> str:
+        if default_prob < 0.02: return "LOW RISK"
+        if default_prob < 0.05: return "MODERATE RISK"
+        if default_prob < 0.10: return "MEDIUM RISK"
+        return "HIGH RISK"
+    
+    def _score_grade(self, score: int) -> str:
+        if score >= 750: return "Excellent"
+        if score >= 700: return "Good"
+        if score >= 650: return "Fair"
+        return "Poor"
+    
+    def _dpd_status(self, credit_history: pd.DataFrame) -> str:
+        delinq = credit_history.get('delinquent', pd.Series([0])).sum()
+        if delinq == 0: return "0 DPD - Clean"
+        if delinq <= 2: return f"{delinq} instances (30 DPD)"
+        return f"{delinq} instances (60+ DPD)"
+  • Debt-to-Equity Ratio: {latest.get('total_debt', 0) / max(latest.get('net_worth', 1), 1):.2f}x
+  • Current Ratio: {latest.get('current_assets', 0) / max(latest.get('current_liabilities', 1), 1):.2f}x
+  • Tangible Net Worth: ₹{latest.get('tangible_net_worth', 0):,.2f}
+"""
+        
+        memo += f"""
+4. COLLATERAL (Security)
+{'─'*80}
+
+Primary Security:
+  • Type: {applicant_data.get('collateral_type', 'N/A')}
+  • Value: ₹{applicant_data.get('collateral_value', 0):,.2f}
+  • LTV Ratio: {(ml_decision['credit_limit'] / max(applicant_data.get('collateral_value', 1), 1))*100:.1f}%
+
+Collateral Coverage: {(applicant_data.get('collateral_value', 0) / max(ml_decision['credit_limit'], 1))*100:.1f}%
+
+5. CONDITIONS (Economic & Industry Environment)
+{'─'*80}
+
+Industry: {applicant_data.get('industry', 'N/A')}
+Sector Outlook: {applicant_data.get('sector_outlook', 'Stable')}
+
+Market Position:
+  • Market Share: {applicant_data.get('market_share', 'N/A')}
+  • Competitive Position: {applicant_data.get('competitive_position', 'N/A')}
+
+{'='*80}
+PRIMARY DUE DILIGENCE FINDINGS
+{'='*80}
+
+{primary_insights or 'No primary insights recorded'}
+
+{'='*80}
+DATA VALIDATION & FRAUD CHECKS
+{'='*80}
+
+"""
+        if validation_results:
+            memo += "GST-Bank Cross-Verification:\n"
+            gst_bank = validation_results.get('gst_bank_verification', {})
+            if gst_bank:
+                memo += f"  • Status: {'⚠️ MISMATCH DETECTED' if gst_bank.get('is_suspicious') else '✓ Verified'}\n"
+                memo += f"  • Variance: {gst_bank.get('variance_pct', 0):.2f}%\n"
+            
+            circular = validation_results.get('circular_trading', {})
+            if circular and circular.get('detected'):
+                memo += f"\n⚠️ Circular Trading Alert:\n"
+                memo += f"  • {circular.get('count', 0)} suspicious patterns detected\n"
+            
+            gstr = validation_results.get('gstr_verification', {})
+            if gstr:
+                memo += f"\nGSTR-2A vs 3B Reconciliation:\n"
+                memo += f"  • ITC Mismatch: {gstr.get('mismatch_pct', 0):.2f}%\n"
+                memo += f"  • Risk Level: {gstr.get('risk_level', 'N/A')}\n"
+        
+        memo += f"""
+{'='*80}
+ML MODEL INSIGHTS & EXPLAINABILITY
+{'='*80}
+
+Model Confidence: {ml_decision['approval_probability']*100:.1f}%
+Default Risk: {ml_decision['default_probability']*100:.2f}%
+
+Top Risk Factors (Feature Importance):
+"""
+        for feature, importance in sorted(feature_importance.items(), key=lambda x: x[1], reverse=True)[:8]:
+            memo += f"  • {feature.replace('_', ' ').title()}: {importance:.3f}\n"
+        
+        memo += f"""
+{'='*80}
+FINAL RECOMMENDATION & DECISION RATIONALE
+{'='*80}
+
+Decision: {ml_decision['decision']}
+
+"""
+        if ml_decision['decision'] == 'APPROVE':
+            memo += f"""Approved Credit Facility:
+  • Sanctioned Limit: ₹{ml_decision['credit_limit']:,.2f}
+  • Interest Rate: Base Rate + {ml_decision['risk_premium_bps']} bps
+  • Tenure: {applicant_data.get('tenure_months', 'N/A')} months
+  • Repayment: {applicant_data.get('repayment_type', 'N/A')}
+
+Conditions Precedent:
+  • Execution of loan documents
+  • Creation of security as per sanction terms
+  • Submission of post-dated cheques
+  • Insurance coverage on assets
+
+Covenants:
+  • Maintain minimum DSCR of 1.25x
+  • Submit quarterly financial statements
+  • No dividend distribution without lender consent
+  • Maintain debt-equity ratio below 2:1
+"""
+        else:
+            memo += f"""Rejection Rationale:
+"""
+            if ml_decision['approval_probability'] < 0.5:
+                memo += f"  • Low approval confidence ({ml_decision['approval_probability']*100:.1f}%)\n"
+            if ml_decision['default_probability'] > 0.15:
+                memo += f"  • High default risk ({ml_decision['default_probability']*100:.2f}%)\n"
+            if validation_results and validation_results.get('gst_bank_verification', {}).get('is_suspicious'):
+                memo += f"  • GST-Bank mismatch indicating potential revenue inflation\n"
+            if research_summary and '⚠️' in research_summary:
+                memo += f"  • Adverse findings in secondary research\n"
+        
+        memo += f"""
+{'='*80}
+PREPARED BY
+{'='*80}
+
+Credit Officer: [Name]
+Date: {datetime.now().strftime('%d-%b-%Y')}
+
+REVIEWED BY
+Credit Manager: [Name]
+Date: ___________
+
+APPROVED BY
+Credit Committee: [Names]
+Date: ___________
+
+{'='*80}
+END OF MEMO
+{'='*80}
+
+Note: This CAM was generated using AI-powered credit decisioning engine.
+All recommendations are subject to final approval by authorized credit committee.
+"""
+        return memo

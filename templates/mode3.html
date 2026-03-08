@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recommendation Engine | Intelli-Credit</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: white; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 30px; }
+        .header h1 { color: #4facfe; font-size: 2.5em; margin-bottom: 10px; }
+        .back-btn { background: #6c757d; color: white; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; margin-bottom: 20px; text-decoration: none; display: inline-block; }
+        .content { background: white; padding: 40px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 600; color: #333; }
+        .form-group input, .form-group textarea { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .btn { background: #4facfe; color: white; padding: 15px 40px; border: none; border-radius: 8px; font-size: 1.1em; font-weight: 600; cursor: pointer; }
+        .btn:hover { background: #3e9bed; }
+        .result { margin-top: 30px; padding: 30px; border-radius: 10px; display: none; }
+        .result.approve { background: #d4edda; border: 2px solid #28a745; }
+        .result.reject { background: #f8d7da; border: 2px solid #dc3545; }
+        .loading { display: none; text-align: center; padding: 20px; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #4facfe; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: 0 auto; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .cam-section { margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 8px; white-space: pre-wrap; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-btn">← Back to Home</a>
+        
+        <div class="header">
+            <h1>💡 Recommendation Engine</h1>
+            <p>Generate credit decisions and CAM reports</p>
+        </div>
+
+        <div class="content">
+            <form id="recommendForm">
+                <h3>Applicant Information</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Company Name</label>
+                        <input type="text" name="company_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>CIN</label>
+                        <input type="text" name="cin" required>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Financial Data</h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Revenue (₹)</label>
+                        <input type="number" name="revenue" required>
+                    </div>
+                    <div class="form-group">
+                        <label>EBITDA (₹)</label>
+                        <input type="number" name="ebitda" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Total Debt (₹)</label>
+                        <input type="number" name="total_debt" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Current Ratio</label>
+                        <input type="number" step="0.01" name="current_ratio" required>
+                    </div>
+                </div>
+
+                <h3 style="margin-top: 30px;">Additional Context (Optional)</h3>
+                <div class="form-group">
+                    <label>Research Summary</label>
+                    <textarea name="research_summary" rows="3" placeholder="Paste research findings here..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Verification Notes</label>
+                    <textarea name="verification_notes" rows="3" placeholder="GST-Bank verification results..."></textarea>
+                </div>
+
+                <button type="submit" class="btn">Generate Decision & CAM</button>
+            </form>
+
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>Analyzing and generating CAM...</p>
+            </div>
+
+            <div class="result" id="result"></div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('recommendForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const data = Object.fromEntries(formData);
+            
+            document.querySelector('.loading').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            
+            const response = await fetch('/api/mode3/recommend', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(data)
+            });
+            
+            const result = await response.json();
+            document.querySelector('.loading').style.display = 'none';
+            
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result ' + (result.decision === 'APPROVE' ? 'approve' : 'reject');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `
+                <h2>Decision: ${result.decision}</h2>
+                <p><strong>Approved Amount:</strong> ₹${result.approved_amount?.toLocaleString() || 'N/A'}</p>
+                <p><strong>Interest Rate:</strong> ${result.interest_rate}%</p>
+                <h3>Five Cs Analysis</h3>
+                <pre>${JSON.stringify(result.five_cs_analysis, null, 2)}</pre>
+                <h3>Explanation</h3>
+                <p>${result.decision_explanation}</p>
+                <h3>Credit Appraisal Memo (CAM)</h3>
+                <div class="cam-section">${result.cam_document}</div>
+            `;
+        });
+    </script>
+</body>
+</html>
